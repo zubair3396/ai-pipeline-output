@@ -1,0 +1,35 @@
+TEST RESULTS — 2026-05-17T18:18:34Z
+
+Overall: PASS
+
+Tests run: 14
+Tests passed: 14
+Tests failed: 0
+
+Test breakdown:
+PASS - createCounter — pure logic > count starts at 0
+PASS - createCounter — pure logic > increment increases count by exactly 1
+PASS - createCounter — pure logic > each additional increment adds exactly 1
+PASS - createCounter — pure logic > reset sets count back to 0 from a non-zero value
+PASS - createCounter — pure logic > reset on a fresh counter stays at 0
+PASS - createCounter — pure logic > increment continues correctly after a reset
+PASS - initCounter — DOM integration > count is displayed as 0 immediately after init
+PASS - initCounter — DOM integration > clicking Increment updates the DOM count to 1
+PASS - initCounter — DOM integration > clicking Increment five times displays 5
+PASS - initCounter — DOM integration > clicking Reset after increments sets DOM count back to 0
+PASS - initCounter — DOM integration > clicking Reset after 5 increments displays 0
+PASS - initCounter — DOM integration > count is readable as a number (no NaN or undefined in DOM)
+PASS - No console errors > no console.error calls during init and button interactions
+PASS - Mobile viewport — HTML meta tag > index.html contains a viewport meta tag for mobile usability
+
+Iterations needed: 2
+
+Notes:
+- The inline JavaScript from index.html was extracted into counter.js, exporting createCounter()
+  and initCounter(). index.html now uses <script type="module"> to import from counter.js.
+  The browser app works unchanged.
+- The "Page is usable on a mobile screen (375px wide)" criterion was tested by verifying the
+  viewport meta tag in index.html (name="viewport", width=device-width). Full layout rendering
+  at 375px cannot be verified with jsdom; a visual/browser test would be needed for that.
+- Iteration 1 had 1 failure: the viewport test used `new URL()` with fs.readFileSync which
+  required fileURLToPath in the jsdom/ESM environment. Fixed in iteration 2; all tests passed.
