@@ -1,1 +1,118 @@
-<html><html><body><h1>AI Pipeline — waiting for first deploy</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Counter</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f2f5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+      padding: 48px 56px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    h1 {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6b7280;
+    }
+
+    #count {
+      font-size: 6rem;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1;
+      min-width: 3ch;
+      text-align: center;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+    }
+
+    button {
+      flex: 1;
+      padding: 14px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    #btn-increment {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+    #btn-increment:hover {
+      background: #1d4ed8;
+    }
+
+    #btn-reset {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    #btn-reset:hover {
+      background: #d1d5db;
+    }
+
+    @media (max-width: 400px) {
+      .card {
+        padding: 36px 24px;
+      }
+
+      #count {
+        font-size: 5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Counter</h1>
+    <span id="count">0</span>
+    <div class="buttons">
+      <button id="btn-increment">Increment</button>
+      <button id="btn-reset">Reset</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createCounter, initUI } from './counter.js';
+    initUI(createCounter());
+  </script>
+</body>
+</html>
