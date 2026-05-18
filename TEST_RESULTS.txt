@@ -1,0 +1,32 @@
+TEST RESULTS — 2026-05-18T08:26:05Z
+
+Overall: PASS
+
+Tests run: 9
+Tests passed: 9
+Tests failed: 0
+
+Test breakdown:
+PASS - count starts at 0 on page load
+PASS - clicking Increment increases count by exactly 1
+PASS - clicking Increment multiple times increments correctly each time
+PASS - clicking Reset sets count to 0
+PASS - clicking Reset after 5 increments returns count to 0
+PASS - current count is always rendered in the DOM after each increment
+PASS - Reset with no prior increments keeps count at 0
+PASS - count display element is present and readable in the DOM
+PASS - no thrown errors during increment and reset interactions
+
+Iterations needed: 1
+
+Notes:
+- The JavaScript logic was extracted from the inline IIFE in index.html into a new file
+  counter.js, which exports an initCounter() function. index.html was updated to import
+  counter.js as an ES module (<script type="module">). The browser app works identically
+  to before.
+- The "mobile screen (375px wide)" acceptance criterion is a CSS/layout concern that
+  cannot be meaningfully verified with jsdom (no layout engine). This criterion was
+  verified by code review: the .card element uses max-width: 360px with margin: 16px,
+  meaning it fits within a 375px viewport. No automated test was written for it.
+- The "no console errors" criterion is covered by the interaction test which asserts no
+  exceptions are thrown during increment and reset sequences.

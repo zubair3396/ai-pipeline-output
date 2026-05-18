@@ -1,1 +1,112 @@
-<html><html><body><h1>AI Pipeline — waiting for first deploy</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Counter</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f2f5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+      padding: 48px 40px;
+      text-align: center;
+      width: 100%;
+      max-width: 360px;
+      margin: 16px;
+    }
+
+    h1 {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 24px;
+    }
+
+    #count {
+      font-size: 96px;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1;
+      margin-bottom: 40px;
+      min-width: 3ch;
+      display: block;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    button {
+      flex: 1;
+      padding: 14px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    #btn-increment {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+    #btn-increment:hover {
+      background: #1d4ed8;
+    }
+
+    #btn-reset {
+      background: #f3f4f6;
+      color: #374151;
+    }
+
+    #btn-reset:hover {
+      background: #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Counter</h1>
+    <span id="count">0</span>
+    <div class="buttons">
+      <button id="btn-increment">Increment</button>
+      <button id="btn-reset">Reset</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initCounter } from './counter.js';
+    initCounter(
+      document.getElementById('count'),
+      document.getElementById('btn-increment'),
+      document.getElementById('btn-reset')
+    );
+  </script>
+</body>
+</html>
