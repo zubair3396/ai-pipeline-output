@@ -1,0 +1,42 @@
+TEST RESULTS — 2026-05-18T07:53:28Z
+
+Overall: PASS
+
+Tests run: 19
+Tests passed: 19
+Tests failed: 0
+
+Test breakdown:
+PASS - formatTime: returns 00:00.00 for 0 ms
+PASS - formatTime: formats 1 second as 00:01.00
+PASS - formatTime: formats 1.5 seconds as 00:01.50
+PASS - formatTime: formats 1 minute 1 second as 01:01.00
+PASS - formatTime: formats 2 minutes 5 seconds as 02:05.00
+PASS - Stopwatch: display shows 00:00.00 on init and lap list is empty
+PASS - Stopwatch: lap button is disabled before start
+PASS - Stopwatch: clicking Start enables the lap button
+PASS - Stopwatch: display updates to show elapsed time after Start and a rendered frame
+PASS - Stopwatch: clicking Stop freezes the display
+PASS - Stopwatch: timer can be resumed after Stop and continues from where it left off
+PASS - Stopwatch: clicking Reset returns display to 00:00.00 and clears all laps
+PASS - Stopwatch: clicking Reset disables the Lap button
+PASS - Stopwatch: clicking Reset hides the laps header
+PASS - Stopwatch: clicking Lap while running adds an entry labelled "Lap 1" with the current time
+PASS - Stopwatch: multiple lap clicks produce sequential labels Lap 1, Lap 2, …
+PASS - Stopwatch: clicking Lap makes the laps header visible
+PASS - Stopwatch: calling lap() when not running does not add any entry
+PASS - Stopwatch: lap button is disabled (not clickable) before start
+
+Iterations needed: 1
+
+Notes:
+- The inline IIFE in index.html was refactored into stopwatch.js (ES module). index.html now uses
+  <script type="module"> to import createStopwatch() from stopwatch.js. Logic is identical; no
+  behaviour was changed.
+- Because index.html uses <script type="module">, it must be served over HTTP (e.g. npx serve .)
+  rather than opened directly via file:// — browsers block relative ES module imports on file://.
+- requestAnimationFrame was mocked to fire only when explicitly invoked in tests, making timing
+  deterministic without real animation frames.
+- The "no console errors" criterion and "mobile usable at 375px" criterion are not exercised by
+  unit tests. The first is inherently a browser runtime check; the second is purely CSS/layout
+  and cannot be meaningfully validated with jsdom.
