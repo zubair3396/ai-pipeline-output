@@ -1,1 +1,201 @@
-<html><html><body><h1>AI Pipeline — waiting for first deploy</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stopwatch</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 16px 60px;
+    }
+
+    h1 {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 48px;
+    }
+
+    .display {
+      font-size: clamp(3.5rem, 12vw, 6rem);
+      font-weight: 200;
+      letter-spacing: 0.05em;
+      font-variant-numeric: tabular-nums;
+      color: #fff;
+      margin-bottom: 52px;
+      user-select: none;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    button {
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      min-width: 90px;
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+
+    #btn-start {
+      background: #1db954;
+      color: #000;
+    }
+
+    #btn-start:hover {
+      background: #1ed760;
+    }
+
+    #btn-stop {
+      background: #e63946;
+      color: #fff;
+    }
+
+    #btn-stop:hover {
+      background: #ff4d5a;
+    }
+
+    #btn-lap {
+      background: #333;
+      color: #fff;
+    }
+
+    #btn-lap:hover:not(:disabled) {
+      background: #444;
+    }
+
+    #btn-lap:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    #btn-reset {
+      background: #222;
+      color: #aaa;
+    }
+
+    #btn-reset:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .laps {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .laps-header {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #555;
+      border-bottom: 1px solid #222;
+      padding-bottom: 8px;
+      margin-bottom: 0;
+      display: none;
+    }
+
+    .laps-header.visible {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .lap-list {
+      list-style: none;
+    }
+
+    .lap-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #1a1a1a;
+      font-size: 0.95rem;
+      font-variant-numeric: tabular-nums;
+      color: #ccc;
+      animation: fadeIn 0.15s ease;
+    }
+
+    .lap-list li .lap-label {
+      color: #666;
+      font-size: 0.85rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 375px) {
+      button {
+        padding: 12px 20px;
+        min-width: 76px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Stopwatch</h1>
+
+  <div class="display" id="display">00:00.00</div>
+
+  <div class="controls">
+    <button id="btn-start">Start</button>
+    <button id="btn-stop">Stop</button>
+    <button id="btn-lap" disabled>Lap</button>
+    <button id="btn-reset">Reset</button>
+  </div>
+
+  <div class="laps" id="laps-section">
+    <div class="laps-header" id="laps-header">
+      <span>Lap</span>
+      <span>Time</span>
+    </div>
+    <ul class="lap-list" id="lap-list"></ul>
+  </div>
+
+  <script type="module">
+    import { createStopwatch } from './stopwatch.js';
+
+    createStopwatch({
+      display:     document.getElementById('display'),
+      btnStart:    document.getElementById('btn-start'),
+      btnStop:     document.getElementById('btn-stop'),
+      btnLap:      document.getElementById('btn-lap'),
+      btnReset:    document.getElementById('btn-reset'),
+      lapList:     document.getElementById('lap-list'),
+      lapsHeader:  document.getElementById('laps-header'),
+    });
+  </script>
+</body>
+</html>
