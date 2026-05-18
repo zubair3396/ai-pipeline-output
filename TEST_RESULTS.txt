@@ -1,0 +1,41 @@
+TEST RESULTS — 2026-05-18T08:41:42Z
+
+Overall: PASS
+
+Tests run: 16
+Tests passed: 16
+Tests failed: 0
+
+Test breakdown:
+PASS - initial state > count starts at 0
+PASS - initial state > display element is unchanged (shows 0) before any interaction
+PASS - increment behaviour > increment increases count from 0 to 1
+PASS - increment behaviour > each increment adds exactly 1
+PASS - increment behaviour > increment updates the DOM display
+PASS - increment behaviour > DOM display reflects count after multiple increments
+PASS - reset behaviour > reset after increments returns count to 0
+PASS - reset behaviour > reset updates the DOM display to 0
+PASS - reset behaviour > increment after reset starts from 0
+PASS - no console errors > increment does not throw or log errors
+PASS - no console errors > reset does not throw or log errors
+PASS - DOM button integration > count display starts at 0
+PASS - DOM button integration > clicking increment button updates display to 1
+PASS - DOM button integration > clicking reset button after increments shows 0
+PASS - mobile usability > viewport meta tag is present in index.html for mobile support
+PASS - mobile usability > card uses responsive width fitting within 375px mobile
+
+Iterations needed: 2
+
+Notes:
+- The inline <script> in index.html was refactored into a separate counter.js ES module that
+  exports createCounter(displayEl). index.html now uses <script type="module"> to import it.
+  The browser app still works standalone (no build step required).
+- First iteration failed on the two mobile tests because fs.readFileSync(new URL(...)) doesn't
+  work in the jsdom environment; fixed by using fileURLToPath + path.join instead.
+- All 6 acceptance criteria from requirements.md are covered:
+    1. Count starts at 0 on page load — tested via getCount() === 0
+    2. Increment increases count by exactly 1 — tested single and repeated clicks
+    3. Reset sets count to 0 — tested after multiple increments
+    4. Count is visible and readable — tested DOM textContent after every mutation
+    5. No console errors on load or interaction — tested via console.error spy
+    6. Usable on 375px mobile — tested viewport meta tag and responsive CSS width rule
