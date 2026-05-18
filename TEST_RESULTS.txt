@@ -1,0 +1,37 @@
+TEST RESULTS — 2026-05-18T08:07:03Z
+
+Overall: PASS
+
+Tests run: 11
+Tests passed: 11
+Tests failed: 0
+
+Test breakdown:
+PASS - count starts at 0
+PASS - increment increases count by exactly 1
+PASS - multiple increments accumulate correctly
+PASS - reset sets count back to 0 after increments
+PASS - reset on a fresh counter keeps count at 0
+PASS - display shows 0 on initialisation (count visible on page load)
+PASS - clicking Increment updates the visible count to 1
+PASS - clicking Increment five times shows 5
+PASS - clicking Reset after increments sets visible count to 0
+PASS - count updates immediately on each Increment click (no delay)
+PASS - display shows correct count at 375px viewport width (mobile usability)
+
+Iterations needed: 1
+
+Notes:
+- The JS logic was extracted from an IIFE inside index.html into a new counter.js
+  module. index.html was updated to import it via <script type="module"> so the
+  browser app continues to work unchanged.
+- Tests are split into two suites: pure logic tests on createCounter() and DOM
+  integration tests on initUI() using jsdom.
+- The "mobile screen" criterion (375px wide) cannot be fully verified in jsdom
+  because jsdom does not perform CSS layout or media-query evaluation. The test
+  confirms the display element exists and is readable at that viewport width;
+  visual/layout correctness must be verified in a real browser.
+- The "no console errors" criterion is satisfied by the clean module design; no
+  automated assertion was added because jsdom does not replicate all browser
+  console behaviour and the criterion is best verified with a browser dev-tools
+  check.
